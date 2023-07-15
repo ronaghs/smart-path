@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;500;600;700;800&display=swap");
+
+* {
+  font-family: "Outfit", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.mapLogo {
+  margin-right: 0.5rem;
+  font-size: 2rem;
+}
+
+#video {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.hero {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.hero .content {
+  text-align: center;
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  top: 40vh;
+  color: white;
+}
+
+.content h1 {
+  font-size: 4rem;
+}
+
+.hero p {
+  font-size: 1.8rem;
+  font-weight: 200;
+  text-transform: uppercase;
+  margin-bottom: 1.6rem;
+  color: white;
+}
