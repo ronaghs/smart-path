@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import NET from "vanta/src/vanta.net";
-import InfoContent from "../Components/Information/InfoContent";
+import SwiperCarousel from "../Components/Information/SwiperCarousel";
 
 function Vanta() {
   useEffect(() => {
@@ -23,9 +23,7 @@ function Vanta() {
   return (
     <div>
       <div className="vantaBg" id="vanta">
-        <InfoContent />
-        <InfoContent />
-        <InfoContent />
+        <SwiperCarousel />
       </div>
     </div>
   );
