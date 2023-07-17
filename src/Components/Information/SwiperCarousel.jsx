@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   Navigation,
   Pagination,
@@ -10,7 +11,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-export default function SwiperCarousel() {
+function SwiperCarousel(props) {
+  const { slides } = props;
+
   return (
     <div className="carousel-container">
       <Swiper
@@ -22,10 +25,26 @@ export default function SwiperCarousel() {
         keyboard={{ enabled: true }}
         effect="coverflow"
       >
-        <SwiperSlide className="swiper-slider">Slide 1</SwiperSlide>
-        <SwiperSlide className="swiper-slider">Slide 2</SwiperSlide>
-        <SwiperSlide className="swiper-slider">Slide 3</SwiperSlide>
+        {slides.map((slide, index) => (
+          <SwiperSlide className="swiperSlider" key={index}>
+            <div className="slideContent">
+              <p>{slide.description}</p>
+            </div>
+            <img className="slideImage" src={slide.img} alt="" />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );
 }
+
+SwiperCarousel.propTypes = {
+  slides: PropTypes.arrayOf(
+    PropTypes.shape({
+      description: PropTypes.string.isRequired,
+      img: PropTypes.string.isRequired,
+    })
+  ),
+};
+
+export default SwiperCarousel;

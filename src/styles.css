@@ -55,10 +55,10 @@
 .vantaBg {
   display: flex;
   justify-content: center;
-  width: 100%;
+  align-items: center;
   height: 100vh;
   z-index: -1;
-  color: white;
+  position: relative;
 }
 
 .carouselWrapper {
@@ -69,7 +69,6 @@
   max-width: 90%;
   display: block;
   justify-content: center;
-  opacity: 0.95;
   padding: 1rem;
 }
 
@@ -79,16 +78,38 @@
 }
 
 .carousel-container {
-  width: 75vw;
+  width: 70vw;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  display: block;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1;
 }
 
 .swiper-slider {
-  margin-top: 5rem;
   height: 40rem;
   background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  opacity: 0.6;
+  color: white;
+  z-index: 1;
+  position: relative;
+  opacity: 0.85;
+}
+
+.slideImage {
+  height: 250px;
+  width: 250px;
+}
+
+.slideContent {
+  margin-left: 2.5rem;
+  font-size: 2rem;
+  flex-grow: 1;
 }

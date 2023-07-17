@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import NET from "vanta/src/vanta.net";
-import SwiperCarousel from "../Components/Information/SwiperCarousel";
 
 function Vanta() {
+  const vantaRef = useRef(null);
+
   useEffect(() => {
-    NET({
+    // Initialize Vanta.js background
+    vantaRef.current = NET({
       el: "#vanta",
       mouseControls: true,
       touchControls: true,
@@ -18,13 +20,18 @@ function Vanta() {
       points: 15.0,
       maxDistance: 19.0,
     });
+
+    // Clean up Vanta.js background on component unmount
+    return () => {
+      if (vantaRef.current) {
+        vantaRef.current.destroy();
+      }
+    };
   }, []);
 
   return (
     <div>
-      <div className="vantaBg" id="vanta">
-        <SwiperCarousel />
-      </div>
+      <div className="vantaBg" id="vanta" ref={vantaRef} />
     </div>
   );
 }
