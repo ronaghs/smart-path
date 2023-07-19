@@ -18,17 +18,22 @@
 }
 
 #video {
-  position: fixed;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-bottom: solid 2px white;
   z-index: -1;
 }
 
 .hero {
-  height: 100%;
+  height: 100vh;
   width: 100%;
   object-fit: contain;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
 .hero .content {
@@ -37,11 +42,11 @@
   margin: auto;
   width: 100%;
   top: 40vh;
-  color: white;
 }
 
 .content h1 {
   font-size: 4rem;
+  margin-bottom: 1rem;
 }
 
 .hero p {
@@ -49,6 +54,30 @@
   font-weight: 200;
   text-transform: uppercase;
   margin-bottom: 1.6rem;
+  color: white;
+}
+
+.divider {
+  padding: 3rem;
+  text-align: center;
+  background-color: black;
+  height: 32rem;
+  color: white;
+  background-image: url("./assets/city2.jpg");
+  background-size: cover;
+  background-position: center;
+  border-bottom: solid 2px white;
+}
+
+.divider h1 {
+  font-size: 2.5rem;
+}
+
+.divider p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
   color: white;
 }
 
@@ -61,55 +90,88 @@
   position: relative;
 }
 
-.carouselWrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 90%;
-  display: block;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.map {
-  display: flex;
-  justify-content: center;
+.vantaWrapper {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .carousel-container {
   width: 70vw;
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   max-width: 90%;
-  display: block;
+  display: flex;
   justify-content: center;
+  align-items: center;
   padding: 1rem;
   z-index: 1;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .swiper-slider {
   height: 40rem;
-  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
-  color: white;
   z-index: 1;
   position: relative;
-  opacity: 0.85;
+  opacity: 1;
 }
 
 .slideImage {
-  height: 250px;
-  width: 250px;
+  height: 300px;
+  width: 300px;
 }
 
 .slideContent {
   margin-left: 2.5rem;
   font-size: 2rem;
   flex-grow: 1;
+  color: black;
+}
+
+.navbar {
+  background: linear-gradient(to right, #000000, #050f2c);
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  gap: 10rem;
+  margin-top: 4rem;
+}
+
+.divider-image {
+  height: 14rem;
+  width: 14rem;
+  border-radius: 25%;
+  object-fit: cover;
+  border: solid white 2px;
+}
+
+.image-wrapper .caption {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  font-weight: 400;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1000px) {
+  .caption {
+    font-size: 0.8rem;
+  }
+
+  .image-container {
+    flex-direction: column;
+    gap: 1rem; /* Adjust the gap value as needed */
+  }
+
+  .divider {
+    height: 80rem;
+    border-bottom: solid 2px white;
+  }
 }

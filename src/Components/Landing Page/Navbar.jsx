@@ -9,7 +9,11 @@ import { FaMapLocationDot } from "react-icons/fa6";
 
 function Navbar() {
   return (
-    <AppBar position="static" sx={{ backgroundColor: "black" }}>
+    <AppBar
+      className="navbar"
+      position="static"
+      sx={{ backgroundColor: "black" }}
+    >
       <Container maxWidth="l">
         <Toolbar disableGutters>
           <Typography

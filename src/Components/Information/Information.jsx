@@ -1,5 +1,4 @@
 import Vanta from "../../assets/Vanta";
-import Navbar from "../Landing Page/Navbar";
 import SwiperCarousel from "./SwiperCarousel";
 import Qmark from "../../assets/qmark.png";
 import Map from "../../assets/map.png";
@@ -22,7 +21,6 @@ function Information() {
   ];
   return (
     <div>
-      <Navbar />
       <Vanta />
       <SwiperCarousel slides={carouselInfo} className="carousel-container" />
     </div>

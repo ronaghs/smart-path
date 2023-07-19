@@ -14,23 +14,6 @@ function Video() {
         <h1>SmartPath</h1>
         <p>Where Efficiency Meets Connection</p>
         <div>
-          <Link to="/info">
-            <Button
-              variant="outlined"
-              size="large"
-              sx={{
-                marginRight: "1rem",
-                color: "white",
-                borderColor: "white",
-                "&:hover": {
-                  backgroundColor: "white",
-                  color: "black",
-                },
-              }}
-            >
-              How does it Work?
-            </Button>
-          </Link>
           <Link to="/map">
             <Button
               variant="outlined"

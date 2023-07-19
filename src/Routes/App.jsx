@@ -1,6 +1,6 @@
 import LandingPage from "../Components/Landing Page/LandingPage";
 import Information from "../Components/Information/Information";
-import Map from "../Components/Map.jsx/Map";
+import Map from "../Components/Map/Map.jsx";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
