@@ -24,7 +24,6 @@ function Places({ setPlace }) {
   const handleSelect = async (val) => {
     setValue(val, false);
     clearSuggestions();
-
     const results = await getGeocode({ address: val });
     const { lat, lng } = await getLatLng(results[0]);
     setPlace({ lat, lng }); // Update the place using the setter function

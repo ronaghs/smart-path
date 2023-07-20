@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useRef } from "react";
+import React, { useState, useMemo, useCallback, useRef } from "react";
 import {
   GoogleMap,
   Marker,
@@ -9,12 +9,14 @@ import {
 import Places from "./Places";
 
 function Map() {
-  const [place, setPlace] = useState();
   const [addressInputs, setAddressInputs] = useState([""]);
-  const [positions, setPositions] = useState([]); // State variable to hold all positions
+  const [positions, setPositions] = useState([]);
+  const [smartPathPosition, setSmartPathPosition] = useState(null);
+  const [radiusInMiles, setRadiusInMiles] = useState(1); // Default radius in miles
+  const [radiusInMeters, setRadiusInMeters] = useState(1 * 1609.34); // Default radius converted to meters (1 mile ≈ 1609.34 meters)
 
-  const center = useMemo(() => ({ lat: 37, lng: -96 }), []);
-  const mapRef = useRef(GoogleMap);
+  const center = useMemo(() => ({ lat: 27.9, lng: -82.5 }), []);
+  const mapRef = useRef(null);
   const onLoad = useCallback((map) => (mapRef.current = map), []);
   const options = useMemo(
     () => ({
@@ -33,9 +35,17 @@ function Map() {
     const totalLng = positions.reduce((sum, position) => sum + position.lng, 0);
     const avgLat = totalLat / positions.length;
     const avgLng = totalLng / positions.length;
-    setPlace({ lat: avgLat, lng: avgLng });
-    mapRef.current?.panTo({ lat: avgLat, lng: avgLng });
-    console.log("Average Position Coordinate: ", { lat: avgLat, lng: avgLng });
+    const smartPathPosition = { lat: avgLat, lng: avgLng };
+    setSmartPathPosition(smartPathPosition);
+    mapRef.current?.panTo(smartPathPosition);
+    console.log("Average Position Coordinate: ", smartPathPosition);
+  };
+
+  const handleRadiusChange = (event) => {
+    const miles = event.target.value;
+    const meters = miles * 1609.34; // Convert miles to meters (1 mile ≈ 1609.34 meters)
+    setRadiusInMiles(miles);
+    setRadiusInMeters(meters);
   };
 
   return (
@@ -46,14 +56,24 @@ function Map() {
           <Places
             key={index}
             setPlace={(position) => {
-              setPlace(position);
-              setPositions([...positions, position]); // Add the new position to the state variable
+              setPositions([...positions, position]);
+              mapRef.current?.panTo(position);
               console.log("Selected Address Position: ", position);
             }}
           />
         ))}
         <button onClick={handleAddAddress}>Add Address</button>
+
         <button onClick={handleCalculateSmartPath}>Calculate SmartPath</button>
+        <div>
+          <p>Radius (miles)</p>
+          <input
+            type="number"
+            value={radiusInMiles}
+            onChange={handleRadiusChange}
+            placeholder="Radius (mi)"
+          />
+        </div>
       </div>
       <div className="googleMap">
         <GoogleMap
@@ -63,10 +83,32 @@ function Map() {
           onLoad={onLoad}
           options={options}
         >
-          {place && (
+          {positions.map((position, index) => (
+            <React.Fragment key={index}>
+              <Marker
+                position={position}
+                icon="https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png"
+              />
+              {smartPathPosition && (
+                <Circle
+                  center={smartPathPosition}
+                  radius={radiusInMeters}
+                  options={nearbyOptions}
+                />
+              )}
+            </React.Fragment>
+          ))}
+          {smartPathPosition && (
             <>
-              <Marker position={place} />
-              <Circle center={place} radius={2000} options={nearbyOptions} />
+              <Marker
+                position={smartPathPosition}
+                icon="https://maps.gstatic.com/mapfiles/ms2/micons/grn-pushpin.png"
+              />
+              <Circle
+                center={smartPathPosition}
+                radius={radiusInMeters}
+                options={smartPathOptions}
+              />
             </>
           )}
         </GoogleMap>
@@ -90,6 +132,14 @@ const nearbyOptions = {
   fillOpacity: 0.05,
   strokeColor: "#8BC34A",
   fillColor: "#8BC34A",
+};
+
+const smartPathOptions = {
+  ...defaultOptions,
+  zIndex: 4,
+  fillOpacity: 0.2,
+  strokeColor: "#00FF00",
+  fillColor: "#00FF00",
 };
 
 export default Map;
