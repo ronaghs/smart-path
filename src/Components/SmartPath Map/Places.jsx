@@ -27,7 +27,7 @@ function Places({ setPlace }) {
 
     const results = await getGeocode({ address: val });
     const { lat, lng } = await getLatLng(results[0]);
-    setPlace({ lat, lng });
+    setPlace({ lat, lng }); // Update the place using the setter function
   };
 
   return (
