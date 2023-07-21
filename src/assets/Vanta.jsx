@@ -11,14 +11,12 @@ function Vanta() {
       mouseControls: true,
       touchControls: true,
       gyroControls: false,
-      minHeight: 200.0,
-      minWidth: 200.0,
       scale: 1.0,
       scaleMobile: 1.0,
-      color: 0xffffff,
-      backgroundColor: 0x0,
+      color: 0xc0cbd9,
+      backgroundColor: 0x0b0e17,
       points: 15.0,
-      maxDistance: 19.0,
+      maxDistance: 1.0,
     });
 
     // Clean up Vanta.js background on component unmount

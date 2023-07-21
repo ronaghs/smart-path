@@ -184,13 +184,13 @@
 }
 
 .inputContainer {
-  width: 40%;
+  width: 30%;
   padding: 1rem;
   background-color: darkgray;
 }
 
 .googleMap {
-  width: 60%;
+  width: 70%;
   height: 100vh;
 }
 
@@ -213,8 +213,8 @@
 }
 
 .card-list-container {
-  height: 65vh;
-  overflow-y: auto;
+  height: 75vh;
+  overflow: auto;
 }
 
 .addressInfo {
@@ -224,4 +224,10 @@
 
 .addressIcon {
   font-size: 1.5rem;
+}
+
+.poiCard {
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
 }

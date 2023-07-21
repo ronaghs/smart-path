@@ -1,23 +1,27 @@
-export const fetchPOIs = async (smartPathPosition, radiusInMiles) => {
-  const latitude = smartPathPosition.lat;
-  const longitude = smartPathPosition.lng;
-  const distance = radiusInMiles;
+export const fetchPOIs = (smartPathPosition, radiusInMiles, type) => {
+  return new Promise((resolve, reject) => {
+    const location = new google.maps.LatLng(
+      smartPathPosition.lat,
+      smartPathPosition.lng
+    );
 
-  const url = `https://travel-advisor.p.rapidapi.com/restaurants/list-by-latlng?latitude=${latitude}&longitude=${longitude}&limit=30&currency=USD&distance=${distance}&open_now=false&lunit=mi&lang=en_US`;
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "60105630f6msh3a88e5da35ce962p1909d6jsn16f0b6413c91",
-      "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
-    },
-  };
+    const request = {
+      location,
+      radius: radiusInMiles * 1609.34,
+      type: type,
+    };
+    console.log(request);
 
-  try {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    return result.data; // Assuming the data is stored in the 'data' field of the API response
-  } catch (error) {
-    console.error("Error fetching POIs:", error);
-    return [];
-  }
+    const service = new google.maps.places.PlacesService(
+      document.createElement("div")
+    );
+
+    service.nearbySearch(request, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        resolve(results);
+      } else {
+        reject(new Error("Error fetching POIs"));
+      }
+    });
+  });
 };

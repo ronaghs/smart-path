@@ -3,6 +3,13 @@ import { GoogleMap, Marker, Circle } from "@react-google-maps/api";
 import Places from "./Places";
 import POIList from "../PointsOfInterest/POIList";
 import { fetchPOIs } from "../PointsOfInterest/POIAPI";
+import {
+  Typography,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
+} from "@mui/material/";
 
 function Map() {
   const [addressInputs, setAddressInputs] = useState([""]);
@@ -11,6 +18,7 @@ function Map() {
   const [radiusInMiles, setRadiusInMiles] = useState(1); // Default radius in miles
   const [radiusInMeters, setRadiusInMeters] = useState(1 * 1609.34); // Default radius converted to meters (1 mile ≈ 1609.34 meters)
   const [poiData, setPOIData] = useState([]); // State to store fetched POIs
+  const [type, setType] = useState("restaurant");
 
   const center = useMemo(() => ({ lat: 27.9, lng: -82.5 }), []);
   const mapRef = useRef(null);
@@ -38,7 +46,7 @@ function Map() {
 
     // Fetch POIs based on smartPathPosition and user-selected radius
     try {
-      const pois = await fetchPOIs(smartPathPosition, radiusInMiles);
+      const pois = await fetchPOIs(smartPathPosition, radiusInMiles, type);
       setPOIData(pois); // Save the fetched data in state
       console.log("Fetched POIs:", pois);
     } catch (error) {
@@ -81,6 +89,18 @@ function Map() {
             onChange={handleRadiusChange}
             placeholder="Radius (mi)"
           />
+          <FormControl className="form-type">
+            <InputLabel>Select</InputLabel>
+            <Select
+              label="Select"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            >
+              <MenuItem value="restaurant">Restaurants</MenuItem>
+              <MenuItem value="cafe">Cafes</MenuItem>
+              <MenuItem value="bar">Bars</MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <POIList poiData={poiData} />
       </div>
