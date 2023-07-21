@@ -1,12 +1,8 @@
 import React, { useState, useMemo, useCallback, useRef } from "react";
-import {
-  GoogleMap,
-  Marker,
-  DirectionsRenderer,
-  Circle,
-  MarkerClusterer,
-} from "@react-google-maps/api";
+import { GoogleMap, Marker, Circle } from "@react-google-maps/api";
 import Places from "./Places";
+import POIList from "../PointsOfInterest/POIList";
+import { fetchPOIs } from "../PointsOfInterest/POIAPI";
 
 function Map() {
   const [addressInputs, setAddressInputs] = useState([""]);
@@ -14,6 +10,7 @@ function Map() {
   const [smartPathPosition, setSmartPathPosition] = useState(null);
   const [radiusInMiles, setRadiusInMiles] = useState(1); // Default radius in miles
   const [radiusInMeters, setRadiusInMeters] = useState(1 * 1609.34); // Default radius converted to meters (1 mile ≈ 1609.34 meters)
+  const [poiData, setPOIData] = useState([]); // State to store fetched POIs
 
   const center = useMemo(() => ({ lat: 27.9, lng: -82.5 }), []);
   const mapRef = useRef(null);
@@ -29,7 +26,7 @@ function Map() {
     setAddressInputs([...addressInputs, ""]);
   };
 
-  const handleCalculateSmartPath = () => {
+  const handleCalculateSmartPath = async () => {
     // Calculate the average position coordinate (smart path)
     const totalLat = positions.reduce((sum, position) => sum + position.lat, 0);
     const totalLng = positions.reduce((sum, position) => sum + position.lng, 0);
@@ -38,6 +35,17 @@ function Map() {
     const smartPathPosition = { lat: avgLat, lng: avgLng };
     setSmartPathPosition(smartPathPosition);
     mapRef.current?.panTo(smartPathPosition);
+
+    // Fetch POIs based on smartPathPosition and user-selected radius
+    try {
+      const pois = await fetchPOIs(smartPathPosition, radiusInMiles);
+      setPOIData(pois); // Save the fetched data in state
+      console.log("Fetched POIs:", pois);
+    } catch (error) {
+      console.error("Error fetching POIs:", error);
+      setPOIData([]); // Clear the data in case of an error
+    }
+
     console.log("Average Position Coordinate: ", smartPathPosition);
   };
 
@@ -74,6 +82,7 @@ function Map() {
             placeholder="Radius (mi)"
           />
         </div>
+        <POIList poiData={poiData} />
       </div>
       <div className="googleMap">
         <GoogleMap

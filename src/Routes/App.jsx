@@ -1,4 +1,4 @@
-import LandingPage from "../Components/Landing Page/LandingPage";
+import LandingPage from "../Components/LandingPage/LandingPage";
 import Information from "../Components/Information/Information";
 import Map from "../Components/SmartPath Map/SmartMap";
 import { Routes, Route } from "react-router-dom";
