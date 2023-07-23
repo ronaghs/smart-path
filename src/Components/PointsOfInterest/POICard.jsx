@@ -30,7 +30,7 @@ function POICard({ poiData }) {
   };
 
   return (
-    <Card className="poiCard">
+    <Card id="poiCard">
       <CardMedia
         style={{ height: 350 }}
         image={

@@ -4,11 +4,14 @@ import Places from "./Places";
 import POIList from "../PointsOfInterest/POIList";
 import { fetchPOIs } from "../PointsOfInterest/POIAPI";
 import {
+  Box,
   Typography,
   InputLabel,
   MenuItem,
   FormControl,
   Select,
+  Button,
+  Slider,
 } from "@mui/material/";
 
 function Map() {
@@ -29,7 +32,6 @@ function Map() {
     }),
     []
   );
-
   const handleAddAddress = () => {
     setAddressInputs([...addressInputs, ""]);
   };
@@ -57,8 +59,8 @@ function Map() {
     console.log("Average Position Coordinate: ", smartPathPosition);
   };
 
-  const handleRadiusChange = (event) => {
-    const miles = event.target.value;
+  const handleRadiusChange = (value) => {
+    const miles = value;
     const meters = miles * 1609.34; // Convert miles to meters (1 mile ≈ 1609.34 meters)
     setRadiusInMiles(miles);
     setRadiusInMeters(meters);
@@ -67,7 +69,8 @@ function Map() {
   return (
     <div className="googleMapContainer">
       <div className="inputContainer">
-        <h2>Enter Addresses</h2>
+        <h1>Enter addresses</h1>
+
         {addressInputs.map((address, index) => (
           <Places
             key={index}
@@ -78,18 +81,15 @@ function Map() {
             }}
           />
         ))}
-        <button onClick={handleAddAddress}>Add Address</button>
 
-        <button onClick={handleCalculateSmartPath}>Calculate SmartPath</button>
-        <div>
-          <p>Radius (miles)</p>
-          <input
-            type="number"
-            value={radiusInMiles}
-            onChange={handleRadiusChange}
-            placeholder="Radius (mi)"
-          />
-          <FormControl className="form-type">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginBottom: "1rem",
+          }}
+        >
+          <FormControl style={{ flexGrow: 1, zIndex: 0 }}>
             <InputLabel>Select</InputLabel>
             <Select
               label="Select"
@@ -101,9 +101,39 @@ function Map() {
               <MenuItem value="bar">Bars</MenuItem>
             </Select>
           </FormControl>
+          <Button
+            id="addAddressBtn"
+            variant="contained"
+            onClick={handleAddAddress}
+            style={{ marginRight: "1rem" }}
+          >
+            Add Address
+          </Button>
         </div>
-        <POIList poiData={poiData} />
+
+        <div>
+          <p>Radius (miles): {radiusInMiles}</p>
+          <Slider
+            aria-label="radius"
+            value={radiusInMiles}
+            onChange={(event, value) => handleRadiusChange(value)}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={1}
+            max={10}
+          />
+          <Button
+            color="success"
+            variant="contained"
+            onClick={handleCalculateSmartPath}
+          >
+            Calculate SmartPath
+          </Button>
+        </div>
       </div>
+      {poiData.length > 0 && <POIList poiData={poiData} />}
+
       <div className="googleMap">
         <GoogleMap
           zoom={10}

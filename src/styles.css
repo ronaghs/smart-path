@@ -186,7 +186,7 @@
 .inputContainer {
   width: 30%;
   padding: 1rem;
-  background-color: darkgray;
+  background-color: lightcoral;
 }
 
 .googleMap {
@@ -202,19 +202,18 @@
 .combobox-input {
   width: 100%;
   padding: 0.5rem;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  z-index: 1;
 }
 
 .form-container {
-  margin-top: 2rem;
-}
-
-.form-type {
-  padding: 1rem;
+  width: 40%;
 }
 
 .card-list-container {
-  height: 75vh;
-  overflow: auto;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 .addressInfo {
@@ -226,8 +225,14 @@
   font-size: 1.5rem;
 }
 
-.poiCard {
+#poiCard {
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
   padding: 0.5rem;
+  background-color: lightcyan;
+  width: 100%;
+}
+
+#addAddressBtn {
+  margin-left: 10%;
 }
