@@ -22,6 +22,10 @@ function Map() {
   const [radiusInMeters, setRadiusInMeters] = useState(1 * 1609.34); // Default radius converted to meters (1 mile ≈ 1609.34 meters)
   const [poiData, setPOIData] = useState([]); // State to store fetched POIs
   const [type, setType] = useState("restaurant");
+  const [markers, setMarkers] = useState([]); // State to store markers on the map
+  const [selectedPOI, setSelectedPOI] = useState(null);
+  const [infoWindowOpen, setInfoWindowOpen] = useState(false);
+  const [markerPositions, setMarkerPositions] = useState([]); // State to store marker positions on the map
 
   const center = useMemo(() => ({ lat: 27.9, lng: -82.5 }), []);
   const mapRef = useRef(null);
@@ -32,6 +36,7 @@ function Map() {
     }),
     []
   );
+
   const handleAddAddress = () => {
     setAddressInputs([...addressInputs, ""]);
   };
@@ -64,6 +69,15 @@ function Map() {
     const meters = miles * 1609.34; // Convert miles to meters (1 mile ≈ 1609.34 meters)
     setRadiusInMiles(miles);
     setRadiusInMeters(meters);
+  };
+
+  const handleMarkerClick = (poiData) => {
+    const { latitude, longitude } = poiData;
+    const position = { lat: latitude, lng: longitude };
+
+    // Add a new marker to the markers array
+    const newMarker = <Marker position={position} />;
+    setMarkers([newMarker]);
   };
 
   return (
@@ -132,7 +146,9 @@ function Map() {
           </Button>
         </div>
       </div>
-      {poiData.length > 0 && <POIList poiData={poiData} />}
+      {poiData.length > 0 && (
+        <POIList poiData={poiData} onClick={handleMarkerClick} />
+      )}
 
       <div className="googleMap">
         <GoogleMap
@@ -142,6 +158,10 @@ function Map() {
           onLoad={onLoad}
           options={options}
         >
+          {markers.map((marker, index) => (
+            <React.Fragment key={index}>{marker}</React.Fragment>
+          ))}
+
           {positions.map((position, index) => (
             <React.Fragment key={index}>
               <Marker

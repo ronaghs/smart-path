@@ -9,7 +9,7 @@ import {
 } from "@mui/material/";
 import POICard from "./POICard";
 
-function POIList({ poiData }) {
+function POIList({ poiData, onClick }) {
   const poi = poiData.map((establishment) => ({
     location_id: establishment.place_id, // Use place_id as the location_id
     name: establishment.name,
@@ -34,7 +34,11 @@ function POIList({ poiData }) {
       <div className="poi-list-container">
         <div className="card-list-container">
           {poi.map((establishment) => (
-            <POICard key={establishment.location_id} poiData={establishment} />
+            <POICard
+              key={establishment.location_id}
+              poiData={establishment}
+              onClick={() => onClick(establishment, "poi")} // Pass the source "poi" when clicking on the POI card
+            />
           ))}
         </div>
       </div>
