@@ -98,7 +98,6 @@
 
 .carousel-container {
   width: 70vw;
-
   max-width: 90%;
   display: flex;
   justify-content: center;
@@ -110,10 +109,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background-image: linear-gradient(#0b0e17, #1e213a, #0b0e17);
+
+  border-radius: 0.5rem;
 }
 
 .swiper-slide {
-  /* this height even doing anything? */
   height: 40rem;
   display: flex;
   justify-content: center;
@@ -121,12 +122,19 @@
   font-size: 2rem;
   z-index: 1;
   position: relative;
-  opacity: 1;
+}
+
+.swiper-slide p {
+  color: white;
 }
 
 .slideImage {
-  height: 300px;
-  width: 300px;
+  height: auto;
+  width: 65%;
+  margin-right: 3rem;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .slideContent {

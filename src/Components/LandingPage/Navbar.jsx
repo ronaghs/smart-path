@@ -2,9 +2,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-
 import Container from "@mui/material/Container";
-
 import { FaMapLocationDot } from "react-icons/fa6";
 
 function Navbar() {
@@ -35,7 +33,15 @@ function Navbar() {
             SmartPath
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}></Box>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: {
+                xs: "flex",
+                md: "none",
+              },
+            }}
+          ></Box>
           <Typography
             variant="h5"
             noWrap

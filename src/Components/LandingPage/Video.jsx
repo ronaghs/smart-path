@@ -1,8 +1,5 @@
 import GlobeVideo from "../../assets/globevideo.mp4";
-import Button from "@mui/material/Button";
-FaArrowAltCircleRight;
-import { FaArrowAltCircleRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import CallToAction from "./CallToAction";
 
 function Video() {
   return (
@@ -14,22 +11,7 @@ function Video() {
         <h1>SmartPath</h1>
         <p>Where Efficiency Meets Connection</p>
         <div>
-          <Link to="/map">
-            <Button
-              variant="outlined"
-              size="large"
-              sx={{
-                color: "white",
-                borderColor: "white",
-                "&:hover": {
-                  backgroundColor: "white",
-                  color: "black",
-                },
-              }}
-            >
-              Get Started <FaArrowAltCircleRight className="arrowIcon" />
-            </Button>
-          </Link>
+          <CallToAction />
         </div>
       </div>
     </div>

@@ -8,8 +8,8 @@ function Vanta() {
     // Initialize Vanta.js background
     vantaRef.current = NET({
       el: "#vanta",
-      mouseControls: true,
-      touchControls: true,
+      mouseControls: false,
+      touchControls: false,
       gyroControls: false,
       scale: 1.0,
       scaleMobile: 1.0,
