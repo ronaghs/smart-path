@@ -13,6 +13,7 @@ import {
   Button,
   Slider,
 } from "@mui/material/";
+import Vanta2 from "../../assets/Vanta2";
 
 function Map() {
   const [addressInputs, setAddressInputs] = useState([""]);
@@ -27,7 +28,7 @@ function Map() {
   const [infoWindowOpen, setInfoWindowOpen] = useState(false);
   const [markerPositions, setMarkerPositions] = useState([]); // State to store marker positions on the map
 
-  const center = useMemo(() => ({ lat: 27.9, lng: -82.5 }), []);
+  const center = useMemo(() => ({ lat: 27.93, lng: -82.74 }), []);
   const mapRef = useRef(null);
   const onLoad = useCallback((map) => (mapRef.current = map), []);
   const options = useMemo(
@@ -82,6 +83,7 @@ function Map() {
 
   return (
     <div className="googleMapContainer">
+      <Vanta2 />
       <div className="inputContainer">
         <h1>Enter addresses</h1>
 
@@ -103,12 +105,21 @@ function Map() {
             marginBottom: "1rem",
           }}
         >
-          <FormControl style={{ flexGrow: 1, zIndex: 0 }}>
-            <InputLabel>Select</InputLabel>
+          <FormControl style={{ flexGrow: 1, zIndex: 0, color: "white" }}>
+            <InputLabel style={{ color: "white" }}>Select</InputLabel>
             <Select
               label="Select"
               value={type}
               onChange={(e) => setType(e.target.value)}
+              sx={{
+                color: "white",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "white",
+                },
+                "& .MuiSvgIcon-root": {
+                  color: "white",
+                },
+              }}
             >
               <MenuItem value="restaurant">Restaurants</MenuItem>
               <MenuItem value="cafe">Cafes</MenuItem>
@@ -136,6 +147,7 @@ function Map() {
             marks
             min={1}
             max={10}
+            style={{ color: "white" }}
           />
           <Button
             color="success"
@@ -152,7 +164,7 @@ function Map() {
 
       <div className="googleMap">
         <GoogleMap
-          zoom={10}
+          zoom={11}
           center={center}
           mapContainerClassName="mapContainer"
           onLoad={onLoad}
