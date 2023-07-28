@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react"; // Import useState and useEffect
 import {
   Navigation,
   Pagination,
@@ -13,6 +14,19 @@ import "swiper/css/pagination";
 
 function SwiperCarousel(props) {
   const { slides } = props;
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    // Event listener to update isMobile on window resize
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className="carousel-container">
@@ -29,8 +43,11 @@ function SwiperCarousel(props) {
           <SwiperSlide className="swiperSlider" key={index}>
             <div className="slideContent">
               <p>{slide.description}</p>
+              {isMobile && (
+                <img className="slideImage" src={slide.img} alt="" />
+              )}
             </div>
-            <img className="slideImage" src={slide.img} alt="" />
+            {!isMobile && <img className="slideImage" src={slide.img} alt="" />}
           </SwiperSlide>
         ))}
       </Swiper>
