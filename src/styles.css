@@ -300,4 +300,31 @@
     width: 95%; /* Set the desired width (e.g., 90% of the screen width) */
     max-width: 1200px;
   }
+
+  .googleMapContainer {
+    flex-direction: column;
+    height: 93vh;
+  }
+
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+    position: relative;
+    color: white;
+    margin-bottom: 0.5rem; /* Reduce the bottom margin for spacing */
+    height: 40vh; /* Set a maximum height for the input container */
+    overflow: auto;
+  }
+
+  .googleMap {
+    width: 100%;
+    height: 70vh; /* Set the map's height to take up 60% of the screen height */
+  }
+
+  .css-1ytz6dp {
+    height: 0 !important;
+    overflow: hidden !important;
+  }
 }

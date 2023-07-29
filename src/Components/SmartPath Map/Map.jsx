@@ -1,4 +1,10 @@
-import React, { useState, useMemo, useCallback, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 import { GoogleMap, Marker, Circle } from "@react-google-maps/api";
 import Places from "./Places";
 import POIList from "../PointsOfInterest/POIList";
@@ -14,6 +20,7 @@ import {
   Slider,
 } from "@mui/material/";
 import Vanta2 from "../../assets/Vanta2";
+import SwipeableEdgeDrawer from "./DrawerContent";
 
 function Map() {
   const [addressInputs, setAddressInputs] = useState([""]);
@@ -27,6 +34,22 @@ function Map() {
   const [selectedPOI, setSelectedPOI] = useState(null);
   const [infoWindowOpen, setInfoWindowOpen] = useState(false);
   const [markerPositions, setMarkerPositions] = useState([]); // State to store marker positions on the map
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 900);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Remove the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const center = useMemo(() => ({ lat: 27.93, lng: -82.74 }), []);
   const mapRef = useRef(null);
@@ -158,10 +181,17 @@ function Map() {
           </Button>
         </div>
       </div>
-      {poiData.length > 0 && (
+      {isMobile ? (
+        // Display the SwipeableEdgeDrawer only for mobile devices
+        <SwipeableEdgeDrawer
+          poiData={poiData}
+          isMobile={isMobile}
+          handleMarkerClick={handleMarkerClick}
+        />
+      ) : poiData.length > 0 ? (
+        // Render the POIList directly for larger screen sizes when there is POI data
         <POIList poiData={poiData} onClick={handleMarkerClick} />
-      )}
-
+      ) : null}
       <div className="googleMap">
         <GoogleMap
           zoom={11}
