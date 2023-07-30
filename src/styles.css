@@ -327,4 +327,9 @@
     height: 0 !important;
     overflow: hidden !important;
   }
+
+  .form-container {
+    width: 95%;
+    margin-top: 32rem;
+  }
 }
