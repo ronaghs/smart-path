@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export const fetchPOIs = (smartPathPosition, radiusInMiles, type) => {
   return new Promise((resolve, reject) => {
     const location = new google.maps.LatLng(

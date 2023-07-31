@@ -1,12 +1,4 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  Typography,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-} from "@mui/material/";
 import POICard from "./POICard";
 
 function POIList({ poiData, onClick }) {
@@ -67,6 +59,7 @@ POIList.propTypes = {
       photos: PropTypes.array, // Add the 'photos' property to the propTypes
     })
   ).isRequired,
+  onClick: PropTypes.func.isRequired, // Add the onClick prop validation
 };
 
 export default POIList;

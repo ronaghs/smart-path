@@ -4,7 +4,6 @@ import { Global } from "@emotion/react";
 import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { grey } from "@mui/material/colors";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
@@ -139,6 +138,26 @@ SwipeableEdgeDrawer.propTypes = {
    * You won't need it on your project.
    */
   window: PropTypes.func,
+  poiData: PropTypes.arrayOf(
+    PropTypes.shape({
+      place_id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      geometry: PropTypes.shape({
+        location: PropTypes.shape({
+          lat: PropTypes.func.isRequired,
+          lng: PropTypes.func.isRequired,
+        }).isRequired,
+      }).isRequired,
+      user_ratings_total: PropTypes.number.isRequired,
+      rating: PropTypes.number.isRequired,
+      price_level: PropTypes.number,
+      types: PropTypes.arrayOf(PropTypes.string),
+      vicinity: PropTypes.string,
+      photos: PropTypes.array,
+    })
+  ).isRequired,
+  isMobile: PropTypes.bool.isRequired,
+  handleMarkerClick: PropTypes.func.isRequired,
 };
 
 export default SwipeableEdgeDrawer;

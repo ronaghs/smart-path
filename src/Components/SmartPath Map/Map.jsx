@@ -10,8 +10,6 @@ import Places from "./Places";
 import POIList from "../PointsOfInterest/POIList";
 import { fetchPOIs } from "../PointsOfInterest/POIAPI";
 import {
-  Box,
-  Typography,
   InputLabel,
   MenuItem,
   FormControl,
@@ -31,9 +29,6 @@ function Map() {
   const [poiData, setPOIData] = useState([]); // State to store fetched POIs
   const [type, setType] = useState("restaurant");
   const [markers, setMarkers] = useState([]); // State to store markers on the map
-  const [selectedPOI, setSelectedPOI] = useState(null);
-  const [infoWindowOpen, setInfoWindowOpen] = useState(false);
-  const [markerPositions, setMarkerPositions] = useState([]); // State to store marker positions on the map
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
 

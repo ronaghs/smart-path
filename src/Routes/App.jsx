@@ -6,12 +6,14 @@ import DrawerContent from "../Components/SmartPath Map/DrawerContent";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/info" element={<Information />} />
-      <Route path="/map" element={<Map />} />
-      <Route path="/test" element={<DrawerContent />} />
-    </Routes>
+    <div>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/info" element={<Information />} />
+        <Route path="/map" element={<Map />} />
+        <Route path="/test" element={<DrawerContent />} />
+      </Routes>
+    </div>
   );
 }
 

@@ -10,7 +10,7 @@ function SmartMap() {
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
-    <div className="map">
+    <div>
       <Map />
     </div>
   );

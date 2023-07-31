@@ -1,14 +1,10 @@
-// POICard.js
-
 import PropTypes from "prop-types";
 import {
   Box,
   Typography,
-  Button,
   Card,
   CardMedia,
   CardContent,
-  CardActions,
   Chip,
   Link,
 } from "@mui/material/";
@@ -47,7 +43,7 @@ function POICard({ poiData, onClick }) {
   return (
     <Card onClick={handleClick} id="poiCard">
       <CardMedia
-        style={{ height: 350 }}
+        className="cardMedia"
         image={
           poiData.photos && poiData.photos.length > 0
             ? poiData.photos[0].getUrl()
@@ -106,15 +102,16 @@ POICard.propTypes = {
     price_level: PropTypes.number.isRequired,
     ranking: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
-    num_reviews: PropTypes.number.isRequired, // Use the correct property name
-    cuisine: PropTypes.arrayOf(
+    num_reviews: PropTypes.number.isRequired,
+    cuisines: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
       })
     ),
-    address: PropTypes.string,
     photos: PropTypes.array,
   }).isRequired,
+
+  onClick: PropTypes.func.isRequired, // Adding the onClick prop validation
 };
 
 export default POICard;
