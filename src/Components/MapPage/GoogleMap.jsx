@@ -23,13 +23,12 @@ import SwipeableEdgeDrawer from "./DrawerContent";
 function Map() {
   const [addressInputs, setAddressInputs] = useState([""]);
   const [positions, setPositions] = useState([]);
-  const [smartPathPosition, setSmartPathPosition] = useState(null);
+  const [smartPathPosition, setSmartPathPosition] = useState(null); //"smartpathposition" is the caluclated mid point amognst the address inputs
   const [radiusInMiles, setRadiusInMiles] = useState(1); // Default radius in miles
   const [radiusInMeters, setRadiusInMeters] = useState(1 * 1609.34); // Default radius converted to meters (1 mile ≈ 1609.34 meters)
   const [poiData, setPOIData] = useState([]); // State to store fetched POIs
   const [type, setType] = useState("restaurant");
   const [markers, setMarkers] = useState([]); // State to store markers on the map
-
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
 
   useEffect(() => {
@@ -46,7 +45,9 @@ function Map() {
     };
   }, []);
 
+  // Memoized map center - Tampa Bay Area
   const center = useMemo(() => ({ lat: 27.93, lng: -82.74 }), []);
+
   const mapRef = useRef(null);
   const onLoad = useCallback((map) => (mapRef.current = map), []);
   const options = useMemo(
@@ -60,6 +61,7 @@ function Map() {
     setAddressInputs([...addressInputs, ""]);
   };
 
+  //Logic used to calculate the midpoint. Essentially just the average longitude/latitude of all inputted adresses (postion)
   const handleCalculateSmartPath = async () => {
     // Calculate the average position coordinate (smart path)
     const totalLat = positions.reduce((sum, position) => sum + position.lat, 0);
@@ -70,7 +72,7 @@ function Map() {
     setSmartPathPosition(smartPathPosition);
     mapRef.current?.panTo(smartPathPosition);
 
-    // Fetch POIs based on smartPathPosition and user-selected radius
+    // Fetch POIs based on SmartPathPosition and user-selected radius
     try {
       const pois = await fetchPOIs(smartPathPosition, radiusInMiles, type);
       setPOIData(pois); // Save the fetched data in state
@@ -90,6 +92,7 @@ function Map() {
     setRadiusInMeters(meters);
   };
 
+  //Move the marker to the new coordiantes of the selected POI
   const handleMarkerClick = (poiData) => {
     const { latitude, longitude } = poiData;
     const position = { lat: latitude, lng: longitude };

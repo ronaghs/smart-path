@@ -12,6 +12,7 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
+//This component renders the input fields
 function Places({ setPlace }) {
   const {
     ready,

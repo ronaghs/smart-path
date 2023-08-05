@@ -1,17 +1,17 @@
 import PropTypes from "prop-types";
 import POICard from "./POICard";
 
+// Transform each establishment in poiData into a simplified format for rendering
 function POIList({ poiData, onClick }) {
+  // Extract relevant information for rendering POICard components
   const poi = poiData.map((establishment) => ({
     location_id: establishment.place_id, // Use place_id as the location_id
     name: establishment.name,
     latitude: establishment.geometry.location.lat(),
     longitude: establishment.geometry.location.lng(),
     num_reviews: establishment.user_ratings_total,
-    // Add any other relevant properties you need from the Google Places API data
     rating: establishment.rating,
     price_level: establishment.price_level,
-    // Add other relevant properties from the Google Places API data
     cuisine:
       establishment.types && establishment.types.length > 0
         ? establishment.types[0]
@@ -22,7 +22,6 @@ function POIList({ poiData, onClick }) {
 
   return (
     <div className="form-container">
-      {/* Display the names of establishments using POICard component */}
       <div className="poi-list-container">
         <div className="card-list-container">
           {poi.map((establishment) => (
@@ -50,16 +49,14 @@ POIList.propTypes = {
         }).isRequired,
       }).isRequired,
       user_ratings_total: PropTypes.number.isRequired,
-      // Add other relevant PropTypes based on the Google Places API data
       rating: PropTypes.number.isRequired,
       price_level: PropTypes.number,
-      // Add other relevant PropTypes from the Google Places API data
-      types: PropTypes.arrayOf(PropTypes.string), // Add the 'types' property to the propTypes
-      vicinity: PropTypes.string, // Add the 'vicinity' property to the propTypes
-      photos: PropTypes.array, // Add the 'photos' property to the propTypes
+      types: PropTypes.arrayOf(PropTypes.string),
+      vicinity: PropTypes.string,
+      photos: PropTypes.array,
     })
   ).isRequired,
-  onClick: PropTypes.func.isRequired, // Add the onClick prop validation
+  onClick: PropTypes.func.isRequired,
 };
 
 export default POIList;

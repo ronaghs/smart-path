@@ -8,7 +8,6 @@ import {
   Chip,
   Link,
 } from "@mui/material/";
-
 import { PiDotOutlineBold } from "react-icons/pi";
 import { FaStar, FaDollarSign } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
@@ -31,25 +30,26 @@ function POICard({ poiData, onClick }) {
   };
 
   const handleAddressClick = () => {
-    // Generate the Google Maps URL for the establishment's name and address
+    // Generate the Google Maps URL from the establishment's name and address
     const googleMapsURL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
       poiData.name + " " + poiData.address
     )}`;
 
-    // Open the URL in a new tab
     window.open(googleMapsURL, "_blank");
   };
 
   return (
-    <Card onClick={handleClick} id="poiCard">
+    <Card onClick={handleClick} id="poiCard" role="button">
       <CardMedia
         className="cardMedia"
         image={
           poiData.photos && poiData.photos.length > 0
             ? poiData.photos[0].getUrl()
-            : "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
+            : // If google places API does not return an image for an esatblishment, use this stock photo instead
+              "https://www.foodserviceandhospitality.com/wp-content/uploads/2016/09/Restaurant-Placeholder-001.jpg"
         }
         title={poiData.name}
+        alt={poiData.name}
       />
       <CardContent mb={5}>
         <Typography gutterBottom variant="h5">
@@ -59,7 +59,7 @@ function POICard({ poiData, onClick }) {
           <Typography variant="subtitle1">
             {/* Display the actual rating number */}
             {poiData.rating}
-            <FaStar color="gold" />
+            <FaStar aria-label="Star Icon" color="gold" />
             <PiDotOutlineBold />
             {renderReviewCount(poiData.num_reviews)}
           </Typography>
@@ -78,7 +78,7 @@ function POICard({ poiData, onClick }) {
             variant="subtitle1"
           >
             {" "}
-            <FaLocationDot />
+            <FaLocationDot aria-label="Location Pin" />
             {poiData.address}
           </Link>
         </Box>

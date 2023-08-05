@@ -1,8 +1,8 @@
-import LandingPage from "../Components/LandingPage/LandingPage";
-import Information from "../Components/Information/Information";
-import Map from "../Components/SmartPath Map/SmartMap";
+import LandingPage from "../HomePage/HomePage";
+import Information from "../HomePage/InformationCarousel/Information";
+import Map from "../MapPage/SmartMap";
 import { Routes, Route } from "react-router-dom";
-import DrawerContent from "../Components/SmartPath Map/DrawerContent";
+import DrawerContent from "../MapPage/DrawerContent";
 
 function App() {
   return (

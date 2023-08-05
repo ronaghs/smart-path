@@ -4,7 +4,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 
 function CallToAction() {
   return (
-    <div className="calltoactionbtn">
+    <nav className="calltoactionbtn">
       {" "}
       <Link to="/map">
         <Button
@@ -19,10 +19,14 @@ function CallToAction() {
             },
           }}
         >
-          Get Started <FaArrowAltCircleRight className="arrowIcon" />
+          Get Started{" "}
+          <FaArrowAltCircleRight
+            aria-label="Go to SmartMap"
+            className="arrowIcon"
+          />
         </Button>
       </Link>
-    </div>
+    </nav>
   );
 }
 

@@ -13,7 +13,7 @@ function Video() {
       <video autoPlay loop muted id="video">
         <source src={GlobeVideo} type="video/mp4" />
       </video>
-      <div className="content">
+      <header className="content">
         <motion.h1 variants={textVariants} initial="hidden" animate="visible">
           SmartPath
         </motion.h1>
@@ -23,7 +23,7 @@ function Video() {
         <motion.div variants={textVariants} initial="hidden" animate="visible">
           <CallToAction />
         </motion.div>
-      </div>
+      </header>
     </div>
   );
 }

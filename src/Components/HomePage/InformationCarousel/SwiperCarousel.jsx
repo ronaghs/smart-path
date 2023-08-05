@@ -41,13 +41,17 @@ function SwiperCarousel(props) {
       >
         {slides.map((slide, index) => (
           <SwiperSlide className="swiperSlider" key={index}>
-            <div className="slideContent">
+            <section className="slideContent">
               <p>{slide.description}</p>
+
+              {/* Conditionally render differet image size based on screen width  */}
               {isMobile && (
-                <img className="slideImage" src={slide.img} alt="" />
+                <img className="slideImage" src={slide.img} alt={slide.alt} />
               )}
-            </div>
-            {!isMobile && <img className="slideImage" src={slide.img} alt="" />}
+            </section>
+            {!isMobile && (
+              <img className="slideImage" src={slide.img} alt={slide.alt} />
+            )}
           </SwiperSlide>
         ))}
       </Swiper>

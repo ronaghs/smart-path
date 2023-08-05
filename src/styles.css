@@ -44,8 +44,8 @@
   top: 40vh;
 }
 
-.content h1 {
-  font-size: 4rem;
+.content {
+  font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
@@ -63,7 +63,7 @@
   background-color: black;
   height: 32rem;
   color: white;
-  background-image: url("./assets/city2.jpg");
+  background-image: url("./assets/images/city2.jpg");
   background-size: cover;
   background-position: center;
   border-bottom: solid 2px white;

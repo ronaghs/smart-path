@@ -41,7 +41,6 @@ function SwipeableEdgeDrawer(props) {
     setOpen(newOpen);
   };
 
-  // This is used only for the example
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -120,7 +119,7 @@ function SwipeableEdgeDrawer(props) {
             overflow: "auto",
           }}
         >
-          {/* Display the POIList */}
+          {/* Display the POIList  */}
           {poiData.length > 0 ? (
             <POIList poiData={poiData} onClick={handleMarkerClick} />
           ) : (
@@ -133,10 +132,6 @@ function SwipeableEdgeDrawer(props) {
 }
 
 SwipeableEdgeDrawer.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
   poiData: PropTypes.arrayOf(
     PropTypes.shape({

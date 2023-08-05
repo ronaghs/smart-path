@@ -1,10 +1,11 @@
 import { useEffect, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
-import Map from "../../assets/Map.jpg";
-import Friends from "../../assets/friends.jpg";
-import Restaurant from "../../assets/restaurant.jpg";
+import Map from "../../assets/images/Map.jpg";
+import Friends from "../../assets/images/friends.jpg";
+import Restaurant from "../../assets/images/restaurant.jpg";
 
 function Divider() {
+  //Brief fade in animations
   const imageVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } },
@@ -16,8 +17,11 @@ function Divider() {
   };
 
   const controls = useAnimation();
+
+  // Reference for Intersection Observer
   const imageContainerRef = useRef(null);
 
+  // useEffect to trigger animations when in view
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -30,7 +34,7 @@ function Divider() {
       {
         root: null,
         rootMargin: "0px",
-        threshold: 0.2, // Adjust this threshold value as needed
+        threshold: 0.2,
       }
     );
 
@@ -46,14 +50,14 @@ function Divider() {
   }, [controls]);
 
   return (
-    <div className="divider">
-      <h1 className="content">
+    <section className="divider">
+      <h2 className="content">
         Drive Less, do more!
         <p>
           Streamline meeting up with your favorite people and discover new
           hangout spots.
         </p>
-      </h1>
+      </h2>
       <div className="image-container" ref={imageContainerRef}>
         <motion.div
           variants={imageVariants}
@@ -97,7 +101,7 @@ function Divider() {
           </motion.p>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 }
 

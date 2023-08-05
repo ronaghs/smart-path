@@ -1,6 +1,6 @@
 import Navbar from "./Navbar";
 import Video from "./Video";
-import Information from "../Information/Information";
+import Information from "./InformationCarousel/Information";
 import Divider from "./Divider";
 
 function LandingPage() {
