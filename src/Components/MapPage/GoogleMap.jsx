@@ -23,7 +23,7 @@ import SwipeableEdgeDrawer from "./DrawerContent";
 function Map() {
   const [addressInputs, setAddressInputs] = useState([""]);
   const [positions, setPositions] = useState([]);
-  const [smartPathPosition, setSmartPathPosition] = useState(null); //"smartpathposition" is the caluclated mid point amognst the address inputs
+  const [smartPathPosition, setSmartPathPosition] = useState(null); //"smartPathPosition" is the caluclated mid point amognst the address inputs
   const [radiusInMiles, setRadiusInMiles] = useState(1); // Default radius in miles
   const [radiusInMeters, setRadiusInMeters] = useState(1 * 1609.34); // Default radius converted to meters (1 mile ≈ 1609.34 meters)
   const [poiData, setPOIData] = useState([]); // State to store fetched POIs
