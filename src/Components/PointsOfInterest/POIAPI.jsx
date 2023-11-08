@@ -11,7 +11,6 @@ export const fetchPOIs = (smartPathPosition, radiusInMiles, type) => {
       radius: radiusInMiles * 1609.34,
       type: type,
     };
-    console.log(request);
 
     const service = new google.maps.places.PlacesService(
       document.createElement("div")

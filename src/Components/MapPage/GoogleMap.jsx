@@ -76,13 +76,9 @@ function Map() {
     try {
       const pois = await fetchPOIs(smartPathPosition, radiusInMiles, type);
       setPOIData(pois); // Save the fetched data in state
-      console.log("Fetched POIs:", pois);
     } catch (error) {
-      console.error("Error fetching POIs:", error);
       setPOIData([]); // Clear the data in case of an error
     }
-
-    console.log("Average Position Coordinate: ", smartPathPosition);
   };
 
   const handleRadiusChange = (value) => {
@@ -114,7 +110,6 @@ function Map() {
             setPlace={(position) => {
               setPositions([...positions, position]);
               mapRef.current?.panTo(position);
-              console.log("Selected Address Position: ", position);
             }}
           />
         ))}
