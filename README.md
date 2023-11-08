@@ -34,7 +34,7 @@ Video demonstration:
 - Vanta.js
 - Slick Carousel
 
-### Known bugs
+### Issues
 
 #### To-do bugs to fix:
 
