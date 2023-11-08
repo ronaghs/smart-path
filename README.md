@@ -10,6 +10,7 @@ Website link:
 - [Description](#description)
 - [Usage](#usage)
 - [Technologies](#technologies)
+- [Issues](#issues)
 
 ### Description
 
@@ -21,7 +22,7 @@ Users input the addresses of their friends, and SmartPath stores these addresses
 
 Video demonstration:
 
-[![Video Demo](https://youtu.be/x7M18tMKgYs?si=7j7bCmEWMX2mdDB-/0.jpg)](https://youtu.be/x7M18tMKgYs?si=7j7bCmEWMX2mdDB-)
+[![Video Demo](https://img.youtube.com/vi/x7M18tMKgYs/0.jpg)](https://youtu.be/x7M18tMKgYs)
 
 ### Technologies
 
@@ -32,3 +33,9 @@ Video demonstration:
 - Framer Motion
 - Vanta.js
 - Slick Carousel
+
+### Known bugs
+
+#### To-do bugs to fix:
+
+-Clearing the address field does not clear the stored geographical coordinates for that address. This invalidates the "SmartPath" calculation.
