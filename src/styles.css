@@ -130,7 +130,7 @@
 
 .slideImage {
   height: auto;
-  width: 65%;
+  width: 50%;
   margin-right: 3rem;
   border-radius: 8px;
   border: 2px solid #ddd;
@@ -339,5 +339,10 @@
 
   .cardMedia {
     height: 10rem;
+  }
+
+  .content {
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 }
